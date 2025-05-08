@@ -52,14 +52,14 @@
       font-size: 5vw;
       border: none;
       border-radius: 10px;
-      background: #00ff88;
+      background: #4cdc4c;
       color: #000;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
     button:hover {
-      background: #00cc6a;
+      background: #7400cc;
     }
 
     #game-container {
@@ -71,8 +71,57 @@
       display: block;
       margin: auto;
     }
+    #mobile-controls {
+      position: absolute;
+      bottom: 3vh;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-wrap: wrap;
+      width: 40vw;
+      justify-content: center;
+      gap: 8px;
+      z-index: 15;
+    }
+
+    .arrow {
+      background: rgba(0, 255, 136, 0.2);  /* mais transparente */
+      color: rgba(255, 255, 255, 0.8);     /* cor do texto mais suave */
+      font-size: 5vw;
+      width: 10vw;
+      height: 10vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      user-select: none;
+      border: 1px solid rgba(0, 255, 136, 0.4); /* borda sutil */
+      transition: background 0.3s ease; /* Adicionando transição */
+    }
+    .t4e-link {
+      font-size: 6vw;
+      background: #9d00ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .t4e-link:hover {
+      background: #c236ff;
+      box-shadow: 0 0 12px #c236ff;
+    }
+
   </style>
 </head>
+<div id="mobile-controls">
+  <div class="arrow up" onclick="setTouchDirection('UP')">⬆️</div>
+  <div class="arrow left" onclick="setTouchDirection('LEFT')">⬅️</div>
+  <div class="arrow right" onclick="setTouchDirection('RIGHT')">➡️</div>
+  <div class="arrow down" onclick="setTouchDirection('DOWN')">⬇️</div>
+</div>
 <body>
   <div id="promo">🐍 Jogo da Cobrinha T4E Group!</div>
 
@@ -85,7 +134,12 @@
   <div id="gameOverScreen" style="display: none;">
     <h1 style="font-size: 6vw;">💀 Fim de jogo!</h1>
     <p style="font-size: 4vw;">Você foi longe... mas pode ir além com a T4E Group!</p>
-    <button onclick="restartGame()">Jogar Novamente</button>
+    <button class="t4e-link" onclick="window.open('https://t4egroup.com.br', '_blank')">🚀 Vem conhecer a T4E Group</button>
+
+    <button onclick="restartGame()" style="font-size: 4vw; background: transparent; color: #ccc; border: none;">
+      🔄
+    </button>
+    
   </div>
 
   <div id="game-container"></div>
@@ -101,7 +155,12 @@
       "💼 Especialistas em tecnologia para o seu negócio.",
       "📈 T4E Group: inovação e resultado.",
       "🔧 Software sob medida? Fale com a T4E!",
-      "🎯 Seu projeto + T4E = sucesso garantido!"
+      "🎯 Seu projeto + T4E = sucesso garantido!",
+      "🌟 Tecnologia que conecta pessoas e negócios.",
+      "💡 Transformando desafios em oportunidades.",
+      "📊 Soluções inteligentes para um mundo digital.",
+      "🔍 Descubra o futuro com a T4E Group.",
+      "🌐 Inovação que faz a diferença."
     ];
 
     function calculateGrid() {
@@ -222,6 +281,15 @@
       document.getElementById('gameOverScreen').style.display = 'flex';
       document.getElementById('promo').innerText = "💡 Recomece e vá além com a T4E Group!";
     }
+
+    function setTouchDirection(dir) {
+    if ((dir === 'LEFT' && direction !== 'RIGHT') ||
+        (dir === 'RIGHT' && direction !== 'LEFT') ||
+        (dir === 'UP' && direction !== 'DOWN') ||
+        (dir === 'DOWN' && direction !== 'UP')) {
+      direction = dir;
+    }
+  }
   </script>
 </body>
 </html>
